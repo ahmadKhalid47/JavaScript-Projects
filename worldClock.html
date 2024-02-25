@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>weather</title>
+    <script
+      src="https://kit.fontawesome.com/8ab48d9270.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://www.geonames.org/extendedSearchJSON?username=demo"></script>
+
+    <style>
+      * {
+        margin: 0%;
+        padding: 0%;
+        font-family: monospace;
+        text-align: center;
+      }
+      body {
+        width: 100vw;
+        height: 100vh;
+        background-color: rgb(148, 255, 219);
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        gap: 5%;
+      }
+      h1 {
+        padding-top: 7vh;
+        color: rgb(150, 20, 70);
+        text-shadow: 2px 2px 5px orange, -2px -2px 5px orange,
+          -2px 2px 5px orange, -2px 2px 5px orange;
+        font-size: 6vh;
+        font-weight: 900;
+      }
+      #main {
+        width: min(150vh, 90vw);
+        height: fit-content;
+        background-color: rgb(150, 20, 70);
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        border-radius: 20px;
+        box-shadow: 2px 2px 5px orange, -2px -2px 5px orange,
+          -2px 2px 5px orange, -2px 2px 5px orange;
+      }
+      #inner_div {
+        width: 100%;
+        height: 70vmin;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 7vmin;
+        align-items: center;
+      }
+      #input_div {
+        width: min(60vh, 80%);
+        height: fit-content;
+        background-color: aqua;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        border-radius: 10px;
+        position: relative;
+      }
+      input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background-color: black;
+        color: wheat;
+        padding: 1vh 15% 1vh 5%;
+        font-size: 3.5vmin;
+        border-radius: inherit;
+        text-align: start;
+      }
+      input:focus {
+        outline: solid orange;
+      }
+      i {
+        cursor: pointer;
+        position: absolute;
+        width: 10%;
+        color: wheat;
+        font-size: 3vmin;
+        font-weight: 900;
+      }
+      i:active {
+        transform: scale(0.5);
+        color: brown;
+      }
+      p {
+        color: wheat;
+        font-size: 5.5vmin;
+        font-weight: 900;
+        text-shadow: 0.5px 0.5px 1px orange, -0.5px -0.5px 1px orange,
+          -0.5px 0.5px 1px orange, -0.5px 0.5px 1px orange;
+      }
+
+      #loading_icon {
+        display: none;
+        animation: loading_rotate 1s infinite;
+        color: white;
+      }
+
+      @keyframes loading_rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>World Time</h1>
+    <div id="main">
+      <div id="inner_div">
+        <div id="input_div">
+          <input id="search" type="text" placeholder="search city" />
+          <i id="loading_icon" class="fa-solid fa-spinner"></i>
+          <i id="icon" class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <p>Time: <span id="time"></span></p>
+        <p>Date: <span id="date"></span></p>
+        <p>time-zone: <span id="time_zone"></span></p>
+      </div>
+    </div>
+    <script>
+      let input = document.getElementById("search");
+      let icon = document.getElementById("icon");
+      let date = document.getElementById("date");
+      let time = document.getElementById("time");
+      let time_zone = document.getElementById("time_zone");
+      let loading_icon = document.getElementById("loading_icon");
+
+      fun("london");
+
+      function loading_sate_writing() {
+        time.innerHTML = "Loading...";
+        date.innerHTML = "Loading...";
+        time_zone.innerHTML = "Loading...";
+      }
+
+      function loading_sate_color() {
+        time.style.color = "white";
+        date.style.color = "white";
+        time_zone.style.color = "white";
+        loading_icon.style.display = "block";
+        icon.style.display = "none";
+      }
+
+      function success_sate_color() {
+        time.style.color = "wheat";
+        date.style.color = "wheat";
+        time_zone.style.color = "wheat";
+        icon.style.display = "block";
+        loading_icon.style.display = "none";
+      }
+
+      async function fun(cityName) {
+        loading_sate_color();
+        loading_sate_writing();
+
+        let api = `https://api.api-ninjas.com/v1/worldtime?city=${cityName}`;
+        const options = {
+          method: "GET",
+          headers: {
+            "X-Api-Key": "FL6V1VxgEDHlVBDWAqKJgA==QXWbCFw4UzYoGipc",
+          },
+        };
+
+        try {
+          const response = await fetch(api, options);
+          const data = await response.json();
+          if (response.ok) {
+            time.innerHTML = data.hour + " : " + data.minute;
+            date.innerHTML = data.date + " " + data.day_of_week;
+            time_zone.innerHTML = data.timezone;
+          } else {
+            alert("city name is incorrect");
+            time.innerHTML = "-----";
+            date.innerHTML = "-----";
+            time_zone.innerHTML = "-----";
+          }
+          success_sate_color();
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      icon.onclick = function () {
+        if (input.value.trim() != "") {
+          fun(input.value);
+        } else {
+          alert("write something");
+        }
+      };
+
+      input.onkeyup = function (event) {
+        if (event.keyCode === 13) {
+          icon.click();
+        }
+      };
+    </script>
+  </body>
+</html>
