@@ -1,0 +1,755 @@
+<!DOCTYPE >
+<html>
+  <head>
+    <title>block game</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+      }
+
+      body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: black;
+        background: linear-gradient(to right, black 50%, white 50%);
+      }
+
+      #main {
+        width: calc(30vh + 25vw);
+        height: calc(30vh + 25vw);
+        display: flex;
+        flex-wrap: wrap;
+        border: calc(1vh + 1vw) solid rgb(26, 74, 2);
+      }
+
+      .allSquares {
+        width: 12.5%;
+        height: 12.5%;
+        background-color: rgb(0, 255, 26);
+        outline: solid rgb(255, 234, 0);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .allCircles {
+        width: 70%;
+        height: 70%;
+        background-color: transparent;
+        border-radius: 50%;
+        transform: translate(-5%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #div1,
+      #div2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 4vw;
+        width: 10vw;
+        height: 10vw;
+        color: green;
+      }
+
+      @media (max-width: 660px) {
+        body {
+          flex-direction: column;
+          background: linear-gradient(to bottom, black 50%, white 50%);
+        }
+        #main {
+          width: calc(40vh + 30vw);
+          height: calc(40vh + 30vw);
+        }
+        #div1,
+        #div2 {
+          font-size: 4vh;
+        }
+        #div1 {
+          rotate: 180deg;
+        }
+      }
+      @media (max-width: 450px) {
+        #main {
+          width: 90vw;
+          height: 90vw;
+          background-color: red;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="div1">
+      <h1 id="h1">2</h1>
+    </div>
+
+    <div id="main"></div>
+    <div id="div2">
+      <h1 id="h2">2</h1>
+    </div>
+
+    <script>
+      let main = document.getElementById("main");
+      let body = document.querySelector("body");
+      let numbering = 0;
+      let numbering2 = 0;
+      let main_color = "";
+      for (let i = 1; i <= 8; i++) {
+        for (let j = 1; j <= 8; j++) {
+          let new_square = document.createElement("div");
+          let new_circles = document.createElement("div");
+          new_circles.id = "c" + i + j;
+          new_square.id = "s" + i + j;
+          new_square.className = "allSquares";
+          new_circles.className = "allCircles";
+          main.appendChild(new_square);
+          new_square.appendChild(new_circles);
+
+          if (numbering == 0) {
+            if (
+              new_circles.id == "c34" ||
+              new_circles.id == "c43" ||
+              new_circles.id == "c65" ||
+              new_circles.id == "c56"
+            ) {
+              new_circles.style.backgroundColor = "red";
+            }
+          }
+
+          if (new_circles.id == "c45" || new_circles.id == "c54") {
+            new_circles.style.backgroundColor = "black";
+          } else if (new_circles.id == "c44" || new_circles.id == "c55") {
+            new_circles.style.backgroundColor = "white";
+          }
+
+          new_circles.onclick = function () {
+            if (
+              window.getComputedStyle(new_circles).backgroundColor ==
+              "rgb(255, 0, 0)"
+            ) {
+              if (numbering % 2 == 0) {
+                circle_color = "rgb(0, 0, 0)";
+                other_circle_color = "rgb(255, 255, 255)";
+                new_circles.style.backgroundColor = circle_color;
+              } else {
+                circle_color = "rgb(255, 255, 255)";
+                other_circle_color = "rgb(0, 0, 0)";
+                new_circles.style.backgroundColor = circle_color;
+              }
+
+              if (
+                window.getComputedStyle(document.getElementById("c" + i + j))
+                  .backgroundColor == circle_color
+              ) {
+                // ______________________________________________________________________
+
+                for (let k = j + 1; k <= 8; k++) {
+                  if (
+                    window.getComputedStyle(
+                      document.getElementById("c" + i + k)
+                    ).backgroundColor == circle_color
+                  ) {
+                    for (let l = j + 1; l < k; l++) {
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + i + l)
+                        ).backgroundColor == "rgba(0, 0, 0, 0)" ||
+                        window.getComputedStyle(
+                          document.getElementById("c" + i + l)
+                        ).backgroundColor == "rgb(255, 0, 0)"
+                      ) {
+                        var trans1 = false;
+                      }
+                    }
+                    if (trans1 != false) {
+                      for (let m = j + 1; m < k; m++) {
+                        document.getElementById(
+                          "c" + i + m
+                        ).style.backgroundColor = circle_color;
+                      }
+                    }
+                    break;
+                  }
+                }
+
+                for (let k = j - 1; k >= 1; k--) {
+                  if (
+                    window.getComputedStyle(
+                      document.getElementById("c" + i + k)
+                    ).backgroundColor == circle_color
+                  ) {
+                    for (let l = j - 1; l > k; l--) {
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + i + l)
+                        ).backgroundColor == "rgba(0, 0, 0, 0)" ||
+                        window.getComputedStyle(
+                          document.getElementById("c" + i + l)
+                        ).backgroundColor == "rgb(255, 0, 0)"
+                      ) {
+                        var trans2 = false;
+                      }
+                    }
+                    if (trans2 != false) {
+                      for (let m = j - 1; m > k; m--) {
+                        document.getElementById(
+                          "c" + i + m
+                        ).style.backgroundColor = circle_color;
+                      }
+                    }
+                    break;
+                  }
+                }
+
+                // ______________________________________________________________________
+
+                for (let k = i + 1; k <= 8; k++) {
+                  if (
+                    window.getComputedStyle(
+                      document.getElementById("c" + k + j)
+                    ).backgroundColor == circle_color
+                  ) {
+                    for (let l = i + 1; l < k; l++) {
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + l + j)
+                        ).backgroundColor == "rgba(0, 0, 0, 0)" ||
+                        window.getComputedStyle(
+                          document.getElementById("c" + l + j)
+                        ).backgroundColor == "rgb(255, 0, 0)"
+                      ) {
+                        var trans3 = false;
+                      }
+                    }
+                    if (trans3 != false) {
+                      for (let m = i + 1; m < k; m++) {
+                        document.getElementById(
+                          "c" + m + j
+                        ).style.backgroundColor = circle_color;
+                      }
+                    }
+                    break;
+                  }
+                }
+
+                for (let k = i - 1; k >= 1; k--) {
+                  if (
+                    window.getComputedStyle(
+                      document.getElementById("c" + k + j)
+                    ).backgroundColor == circle_color
+                  ) {
+                    for (let l = i - 1; l > k; l--) {
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + l + j)
+                        ).backgroundColor == "rgba(0, 0, 0, 0)" ||
+                        window.getComputedStyle(
+                          document.getElementById("c" + l + j)
+                        ).backgroundColor == "rgb(255, 0, 0)"
+                      ) {
+                        var trans4 = false;
+                      }
+                    }
+                    if (trans4 != false) {
+                      for (let m = i - 1; m > k; m--) {
+                        document.getElementById(
+                          "c" + m + j
+                        ).style.backgroundColor = circle_color;
+                      }
+                    }
+                    break;
+                  }
+                }
+
+                // ______________________________________________________________________
+
+                for (let k1 = i + 1, k2 = j + 1; k1 <= 8, k2 <= 8; k1++, k2++) {
+                  if (k1 > 8 || k2 > 8) {
+                    break;
+                  }
+                  if (
+                    window.getComputedStyle(
+                      document.getElementById("c" + k1 + k2)
+                    ).backgroundColor == circle_color
+                  ) {
+                    for (
+                      let l1 = i + 1, l2 = j + 1;
+                      l1 < k1, l2 < k2;
+                      l1++, l2++
+                    ) {
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + l1 + l2)
+                        ).backgroundColor == "rgba(0, 0, 0, 0)" ||
+                        window.getComputedStyle(
+                          document.getElementById("c" + l1 + l2)
+                        ).backgroundColor == "rgb(255, 0, 0)"
+                      ) {
+                        var trans5 = false;
+                      }
+                    }
+                    if (trans5 != false) {
+                      for (
+                        let m1 = i + 1, m2 = j + 1;
+                        m1 < k1, m2 < k2;
+                        m1++, m2++
+                      ) {
+                        document.getElementById(
+                          "c" + m1 + m2
+                        ).style.backgroundColor = circle_color;
+                      }
+                    }
+                    break;
+                  }
+                }
+
+                for (let k1 = i - 1, k2 = j - 1; k1 >= 1, k2 >= 1; k1--, k2--) {
+                  if (k1 < 1 || k2 < 1) {
+                    break;
+                  }
+                  if (
+                    window.getComputedStyle(
+                      document.getElementById("c" + k1 + k2)
+                    ).backgroundColor == circle_color
+                  ) {
+                    for (
+                      let l1 = i - 1, l2 = j - 1;
+                      l1 > k1, l2 > k2;
+                      l1--, l2--
+                    ) {
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + l1 + l2)
+                        ).backgroundColor == "rgba(0, 0, 0, 0)" ||
+                        window.getComputedStyle(
+                          document.getElementById("c" + l1 + l2)
+                        ).backgroundColor == "rgb(255, 0, 0)"
+                      ) {
+                        var trans6 = false;
+                      }
+                    }
+                    if (trans6 != false) {
+                      for (
+                        let m1 = i - 1, m2 = j - 1;
+                        m1 > k1, m2 > k2;
+                        m1--, m2--
+                      ) {
+                        document.getElementById(
+                          "c" + m1 + m2
+                        ).style.backgroundColor = circle_color;
+                      }
+                    }
+                    break;
+                  }
+                }
+
+                // ______________________________________________________________________
+
+                for (let k1 = i + 1, k2 = j - 1; k1 <= 8, k2 >= 1; k1++, k2--) {
+                  if (k1 > 8 || k2 < 1) {
+                    break;
+                  }
+                  if (
+                    window.getComputedStyle(
+                      document.getElementById("c" + k1 + k2)
+                    ).backgroundColor == circle_color
+                  ) {
+                    for (
+                      let l1 = i + 1, l2 = j - 1;
+                      l1 < k1, l2 > k2;
+                      l1++, l2--
+                    ) {
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + l1 + l2)
+                        ).backgroundColor == "rgba(0, 0, 0, 0)" ||
+                        window.getComputedStyle(
+                          document.getElementById("c" + l1 + l2)
+                        ).backgroundColor == "rgb(255, 0, 0)"
+                      ) {
+                        var trans7 = false;
+                      }
+                    }
+                    if (trans7 != false) {
+                      for (
+                        let m1 = i + 1, m2 = j - 1;
+                        m1 < k1, m2 > k2;
+                        m1++, m2--
+                      ) {
+                        document.getElementById(
+                          "c" + m1 + m2
+                        ).style.backgroundColor = circle_color;
+                      }
+                    }
+                    break;
+                  }
+                }
+
+                for (let k1 = i - 1, k2 = j + 1; k1 >= 1, k2 <= 8; k1--, k2++) {
+                  if (k1 < 1 || k2 > 8) {
+                    break;
+                  }
+                  if (
+                    window.getComputedStyle(
+                      document.getElementById("c" + k1 + k2)
+                    ).backgroundColor == circle_color
+                  ) {
+                    for (
+                      let l1 = i - 1, l2 = j + 1;
+                      l1 > k1, l2 < k2;
+                      l1--, l2++
+                    ) {
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + l1 + l2)
+                        ).backgroundColor == "rgba(0, 0, 0, 0)" ||
+                        window.getComputedStyle(
+                          document.getElementById("c" + l1 + l2)
+                        ).backgroundColor == "rgb(255, 0, 0)"
+                      ) {
+                        var trans8 = false;
+                      }
+                    }
+                    if (trans8 != false) {
+                      for (
+                        let m1 = i - 1, m2 = j + 1;
+                        m1 > k1, m2 < k2;
+                        m1--, m2++
+                      ) {
+                        document.getElementById(
+                          "c" + m1 + m2
+                        ).style.backgroundColor = circle_color;
+                      }
+                    }
+                    break;
+                  }
+                }
+              }
+
+              for (let x = 1; x <= 8; x++) {
+                for (let y = 1; y <= 8; y++) {
+                  if (
+                    window.getComputedStyle(
+                      document.getElementById("c" + x + y)
+                    ).backgroundColor == "rgb(255, 0, 0)"
+                  ) {
+                    document.getElementById("c" + x + y).style.backgroundColor =
+                      "rgba(0, 0, 0, 0)";
+                  }
+                }
+              }
+
+              // ______________________________________________________________________
+              var count1 = 0;
+              var count2 = 0;
+
+              for (let x = 1; x <= 8; x++) {
+                for (let y = 1; y <= 8; y++) {
+                  if (
+                    window.getComputedStyle(
+                      document.getElementById("c" + x + y)
+                    ).backgroundColor == other_circle_color
+                  ) {
+                    for (let k = y + 1; k <= 8; k++) {
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + x + (k - 1))
+                        ).backgroundColor == circle_color
+                      ) {
+                        if (
+                          window.getComputedStyle(
+                            document.getElementById("c" + x + k)
+                          ).backgroundColor == "rgba(0, 0, 0, 0)"
+                        ) {
+                          document.getElementById(
+                            "c" + x + k
+                          ).style.backgroundColor = "red";
+                        }
+                      }
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + x + k)
+                        ).backgroundColor == "rgba(0, 0, 0, 0)" ||
+                        window.getComputedStyle(
+                          document.getElementById("c" + x + k)
+                        ).backgroundColor == "rgb(255, 0, 0)"
+                      ) {
+                        break;
+                      }
+                    }
+                    //_________________________________________
+                    for (let k = y - 1; k >= 1; k--) {
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + x + (k + 1))
+                        ).backgroundColor == circle_color
+                      ) {
+                        if (
+                          window.getComputedStyle(
+                            document.getElementById("c" + x + k)
+                          ).backgroundColor == "rgba(0, 0, 0, 0)"
+                        ) {
+                          document.getElementById(
+                            "c" + x + k
+                          ).style.backgroundColor = "red";
+                        }
+                      }
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + x + k)
+                        ).backgroundColor == "rgba(0, 0, 0, 0)" ||
+                        window.getComputedStyle(
+                          document.getElementById("c" + x + k)
+                        ).backgroundColor == "rgb(255, 0, 0)"
+                      ) {
+                        break;
+                      }
+                    }
+                    //_________________________________________
+
+                    for (let k = x + 1; k <= 8; k++) {
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + (k - 1) + y)
+                        ).backgroundColor == circle_color
+                      ) {
+                        if (
+                          window.getComputedStyle(
+                            document.getElementById("c" + k + y)
+                          ).backgroundColor == "rgba(0, 0, 0, 0)"
+                        ) {
+                          document.getElementById(
+                            "c" + k + y
+                          ).style.backgroundColor = "red";
+                        }
+                      }
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + k + y)
+                        ).backgroundColor == "rgba(0, 0, 0, 0)" ||
+                        window.getComputedStyle(
+                          document.getElementById("c" + k + y)
+                        ).backgroundColor == "rgb(255, 0, 0)"
+                      ) {
+                        break;
+                      }
+                    }
+                    //_________________________________________
+
+                    for (let k = x - 1; k >= 1; k--) {
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + (k + 1) + y)
+                        ).backgroundColor == circle_color
+                      ) {
+                        if (
+                          window.getComputedStyle(
+                            document.getElementById("c" + k + y)
+                          ).backgroundColor == "rgba(0, 0, 0, 0)"
+                        ) {
+                          document.getElementById(
+                            "c" + k + y
+                          ).style.backgroundColor = "red";
+                        }
+                      }
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + k + y)
+                        ).backgroundColor == "rgba(0, 0, 0, 0)" ||
+                        window.getComputedStyle(
+                          document.getElementById("c" + k + y)
+                        ).backgroundColor == "rgb(255, 0, 0)"
+                      ) {
+                        break;
+                      }
+                    }
+                    //_________________________________________
+
+                    for (
+                      let k1 = x + 1, k2 = y + 1;
+                      k1 <= 8, k2 <= 8;
+                      k1++, k2++
+                    ) {
+                      if (k1 > 8 || k2 > 8) {
+                        break;
+                      }
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + (k1 - 1) + (k2 - 1))
+                        ).backgroundColor == circle_color
+                      ) {
+                        if (
+                          window.getComputedStyle(
+                            document.getElementById("c" + k1 + k2)
+                          ).backgroundColor == "rgba(0, 0, 0, 0)"
+                        ) {
+                          document.getElementById(
+                            "c" + k1 + k2
+                          ).style.backgroundColor = "red";
+                        }
+                      }
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + k1 + k2)
+                        ).backgroundColor == "rgba(0, 0, 0, 0)" ||
+                        window.getComputedStyle(
+                          document.getElementById("c" + k1 + k2)
+                        ).backgroundColor == "rgb(255, 0, 0)"
+                      ) {
+                        break;
+                      }
+                    }
+                    //_________________________________________
+
+                    for (
+                      let k1 = x - 1, k2 = y - 1;
+                      k1 >= 1, k2 >= 1;
+                      k1--, k2--
+                    ) {
+                      if (k1 < 1 || k2 < 1) {
+                        break;
+                      }
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + (k1 + 1) + (k2 + 1))
+                        ).backgroundColor == circle_color
+                      ) {
+                        if (
+                          window.getComputedStyle(
+                            document.getElementById("c" + k1 + k2)
+                          ).backgroundColor == "rgba(0, 0, 0, 0)"
+                        ) {
+                          document.getElementById(
+                            "c" + k1 + k2
+                          ).style.backgroundColor = "red";
+                        }
+                      }
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + k1 + k2)
+                        ).backgroundColor == "rgba(0, 0, 0, 0)" ||
+                        window.getComputedStyle(
+                          document.getElementById("c" + k1 + k2)
+                        ).backgroundColor == "rgb(255, 0, 0)"
+                      ) {
+                        break;
+                      }
+                    }
+
+                    //_________________________________________
+
+                    for (
+                      let k1 = x + 1, k2 = y - 1;
+                      k1 <= 8, k2 >= 1;
+                      k1++, k2--
+                    ) {
+                      if (k1 > 8 || k2 < 1) {
+                        break;
+                      }
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + (k1 - 1) + (k2 + 1))
+                        ).backgroundColor == circle_color
+                      ) {
+                        if (
+                          window.getComputedStyle(
+                            document.getElementById("c" + k1 + k2)
+                          ).backgroundColor == "rgba(0, 0, 0, 0)"
+                        ) {
+                          document.getElementById(
+                            "c" + k1 + k2
+                          ).style.backgroundColor = "red";
+                        }
+                      }
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + k1 + k2)
+                        ).backgroundColor == "rgba(0, 0, 0, 0)" ||
+                        window.getComputedStyle(
+                          document.getElementById("c" + k1 + k2)
+                        ).backgroundColor == "rgb(255, 0, 0)"
+                      ) {
+                        break;
+                      }
+                    }
+
+                    //_________________________________________
+
+                    for (
+                      let k1 = x - 1, k2 = y + 1;
+                      k1 >= 1, k2 <= 8;
+                      k1--, k2++
+                    ) {
+                      if (k1 < 1 || k2 > 8) {
+                        break;
+                      }
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + (k1 + 1) + (k2 - 1))
+                        ).backgroundColor == circle_color
+                      ) {
+                        if (
+                          window.getComputedStyle(
+                            document.getElementById("c" + k1 + k2)
+                          ).backgroundColor == "rgba(0, 0, 0, 0)"
+                        ) {
+                          document.getElementById(
+                            "c" + k1 + k2
+                          ).style.backgroundColor = "red";
+                        }
+                      }
+                      if (
+                        window.getComputedStyle(
+                          document.getElementById("c" + k1 + k2)
+                        ).backgroundColor == "rgba(0, 0, 0, 0)" ||
+                        window.getComputedStyle(
+                          document.getElementById("c" + k1 + k2)
+                        ).backgroundColor == "rgb(255, 0, 0)"
+                      ) {
+                        break;
+                      }
+                    }
+                  }
+
+                  if (
+                    window.getComputedStyle(
+                      document.getElementById("c" + x + y)
+                    ).backgroundColor == "rgb(0, 0, 0)"
+                  ) {
+                    count1 += 1;
+                  } else if (
+                    window.getComputedStyle(
+                      document.getElementById("c" + x + y)
+                    ).backgroundColor == "rgb(255, 255, 255)"
+                  ) {
+                    count2 += 1;
+                  }
+                }
+              }
+              document.getElementById("h1").innerHTML = count1;
+              document.getElementById("h2").innerHTML = count2;
+              numbering += 1;
+              numbering2 += 1;
+              if (numbering == 60) {
+                let winner = count1 > count2 ? "black" : "white";
+                setTimeout(() => {
+                  alert(winner + " is winner");
+                }, 700);
+              }
+            }
+          };
+        }
+      }
+    </script>
+  </body>
+</html>
