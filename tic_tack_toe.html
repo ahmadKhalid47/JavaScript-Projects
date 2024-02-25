@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/8ab48d9270.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      * {
+        margin: 0%;
+        padding: 0%;
+        font-family: agency FB;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        background-color: antiquewhite;
+      }
+      #main {
+        width: 70vh;
+        height: 70vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #board {
+        width: inherit;
+        height: inherit;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap;
+        background-color: chocolate;
+        position: absolute;
+        border: solid thick;
+      }
+      i {
+        width: 20%;
+        height: 20%;
+        border: solid thin wheat;
+        font-size: 15vh;
+        padding: 4.2vh;
+        cursor: pointer;
+        text-align: center;
+      }
+      #score_board {
+        width: 70vh;
+        height: 20vh;
+        background-color: lightcyan;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 10vh;
+        font-weight: bolder;
+        border: solid thick;
+      }
+      #line {
+        position: relative;
+        background-color: rgb(255, 0, 0);
+        animation: expand 0.5s forwards;
+        display: none;
+        height: 1%;
+        border-radius: 10px;
+      }
+      #writing {
+        color: red;
+        text-shadow: 2px 2px black, -2px -2px black;
+      }
+      @media (max-width: 500px) {
+        #main {
+          width: 90vw;
+          height: 90vw;
+        }
+        #score_board {
+          height: 30vw;
+          width: 90vw;
+          font-size: 10vw;
+        }
+        i {
+          padding: 5.5vw;
+          font-size: 20vw;
+        }
+      }
+      @keyframes expand {
+        from {
+          width: 0%;
+        }
+        to {
+          width: 90%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <div id="board">
+        <i class="fa-solid"></i>
+        <i class="fa-solid"></i>
+        <i class="fa-solid"></i>
+        <i class="fa-solid"></i>
+        <i class="fa-solid"></i>
+        <i class="fa-solid"></i>
+        <i class="fa-solid"></i>
+        <i class="fa-solid"></i>
+        <i class="fa-solid"></i>
+      </div>
+      <div id="line"></div>
+    </div>
+    <div id="score_board">
+      <p id="writing">
+        player <span id="player_num">1</span> <span id="situation"> turn</span>
+      </p>
+    </div>
+
+    <script>
+      let buttons = document.querySelectorAll("i");
+      let writing = document.getElementById("writing");
+      let single_line = document.getElementById("single_line");
+      let line = document.getElementById("line");
+      let player_num = document.getElementById("player_num");
+      let situation = document.getElementById("situation");
+      var i = 0;
+      var j = 0;
+      let turn_num =0;
+      buttons.forEach(function (a) {
+          j += 1;
+          let temp_i_id = "b" + j;
+          a.id = temp_i_id;
+          a.onclick = function () {
+              if (situation.innerHTML != "wins") {
+                  if (i % 2 == 0 && !a.classList.contains("fa-o") && !a.classList.contains("fa-xmark")) {
+                      player_num.innerHTML = 2;
+                      a.classList.add("fa-o");
+                      a.style.color = "red";
+                      turn_num += 1;
+                      i += 1;
+                      writing.style.color = "blue";
+                  }
+                  else if (i % 2 != 0 && !a.classList.contains("fa-o") && !a.classList.contains("fa-xmark")) {
+                      player_num.innerHTML=1;
+                      a.classList.add("fa-xmark");
+                      a.style.color = "blue";
+                      i += 1;
+                      turn_num += 1;
+                      writing.style.color = "red";
+                  }
+
+                  for (let k1 = 1, k2 = 1; k1 <= 9, k2 <= 3; k1 += 3, k2++) {
+                      if (document.getElementById("b" + k1).classList.contains("fa-o") || document.getElementById("b" + k1).classList.contains("fa-xmark")) {
+                          if (document.getElementById("b" + k1).className == document.getElementById("b" + (k1 + 1)).className && document.getElementById("b" + k1).className == document.getElementById("b" + (k1 + 2)).className) {
+                              situation.innerHTML = "wins";
+                              let k3 = k2 * 23 - 46;
+                              line.style.top = `${k3}vh`;
+                              line.style.display = "flex";
+                          }
+                      }
+                  }
+
+                  for (let k1 = 1; k1 <= 3; k1++) {
+                      if (document.getElementById("b" + k1).classList.contains("fa-o") || document.getElementById("b" + k1).classList.contains("fa-xmark")) {
+                          if (document.getElementById("b" + k1).className == document.getElementById("b" + (k1 + 3)).className && document.getElementById("b" + k1).className == document.getElementById("b" + (k1 + 6)).className) {
+                              situation.innerHTML = "wins";
+                              let k3 = k1 * 23 - 46;
+                              line.style.left = `${k3}vh`;
+                              line.style.rotate = "90deg";
+                              line.style.display = "flex";
+                          }
+                      }
+                  }
+
+                  if (document.getElementById("b" + 1).classList.contains("fa-o") || document.getElementById("b" + 1).classList.contains("fa-xmark")) {
+                      if (document.getElementById("b" + 1).className == document.getElementById("b" + 5).className && document.getElementById("b" + 1).className == document.getElementById("b" + 9).className) {
+                          situation.innerHTML = "wins";
+                          line.style.rotate = "45deg";
+                          line.style.display = "flex";
+                      }
+                  }
+
+                  if (document.getElementById("b" + 3).classList.contains("fa-o") || document.getElementById("b" + 3).classList.contains("fa-xmark")) {
+                      if (document.getElementById("b" + 3).className == document.getElementById("b" + 5).className && document.getElementById("b" + 3).className == document.getElementById("b" + 7).className) {
+                          situation.innerHTML = "wins";
+                          line.style.rotate = "135deg";
+                          line.style.display = "flex";
+                      }
+                  }
+                  if (situation.innerHTML != "wins" && turn_num > 8) {
+                      writing.innerHTML = "draw";
+                      writing.style.color = "white";
+                  }
+
+                  if (player_num.innerHTML == 2 && situation.innerHTML=="wins") {
+                      player_num.innerHTML = 1;
+                      line.style.backgroundColor = "red";
+                      writing.style.color = "red";
+                      writing.style.fontSize = "150%";
+                  }
+                  else if (player_num.innerHTML == 1 && situation.innerHTML == "wins") {
+                      player_num.innerHTML = 2;
+                      line.style.backgroundColor = "blue";
+                      writing.style.color = "blue";
+                      writing.style.fontSize="150%"
+                  }
+              }
+          }
+      })
+    </script>
+  </body>
+</html>
