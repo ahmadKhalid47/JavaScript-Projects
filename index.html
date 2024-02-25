@@ -1,0 +1,1662 @@
+<!DOCTYPE >
+<html> 
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/d866266b1d.js" crossorigin="anonymous"></script>
+    <title>Instagram</title>
+
+<style>
+:root{
+    --purple:#7F2D6F;
+    --red:rgb(239, 49, 109);
+    --yellow:#F6A935;
+    --dark:rgb(58, 49, 52);
+    --white:#FFFFFF;
+    --light_red:rgb(240, 7, 81);
+}
+
+*{
+    font-family: 'Handjet', cursive;
+    margin: 0px;
+    padding: 0px;
+}
+i,button{
+    cursor: pointer;
+}
+.login_page button{    
+    background-color:var(--red) ;
+}
+.login_page{
+    display: none;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#login,#sign-up{ 
+    border: solid thin;
+    display: flex;
+    flex-direction: column;
+    padding: 3vh 4vw;
+    background-image: transparent;
+    position: relative;
+    color: var(--yellow);
+    justify-content: center;
+}
+
+#bg_video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+}
+
+#sign-up{
+    display: none;
+}
+
+input{
+    background-color: var(--yellow);
+    padding: 5px 15px;
+    font-size: large;
+    background-color: transparent;
+    border: solid thin var(--yellow);
+    color: var(--white);
+}
+
+input:focus{
+    outline:solid thin var(--yellow);
+    color: var(--white);
+}
+
+
+#login_page button{
+    width: 49%;
+    height: 30px;
+    border:none;
+    font-size: large;
+}
+
+#login_page button:hover{
+    transform: scale(0.90);
+    transition: 0.1s;
+}
+
+#password_div{
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10%;
+}
+#pass{
+    width: 100%;
+    margin-right: -13%;
+    padding-right: 20%;
+}
+#eye{ 
+    font-size: x-large;
+    margin-left:-2% ;
+}
+
+#main{
+    height: 100vh;
+    background-color: wheat;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.inner_div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    height: fit-content; 
+}
+
+
+.options{ 
+    width: 50%;
+    height: 5vh;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.option_button{
+    width: 33%;  
+    font-size: 20px;
+    font-weight:bolder;   
+    background-color: var(--red);
+    border:solid thick;
+}
+.option_button:hover{
+    background-color: var(--light_red);
+    transform:scale(0.95);
+    transition:ease-out 0.2s;
+}
+
+#home{ 
+    width: 100%;
+    height: 88vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+
+#others_posts{
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto; 
+    padding: 10px 20px; 
+}
+
+.pic_div{
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    border-bottom: solid thin darkblue;
+    height: fit-content;
+}
+
+.other_name{
+    width: 95%;
+    padding-bottom: 7px;
+    font-size: 5vh;
+}
+
+.other_pic{
+    width: 70vh;
+    height: 70vh;
+    margin-bottom: 30px; 
+    border: solid thick darkblue;
+}
+
+
+.comment_input_section{
+    display: none;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+    border-radius: 50px;
+    width: 70%;
+    background-color: var(--yellow);
+}
+
+.comment_input_section input{
+    border: none;
+    outline: none;
+}
+
+.like_section{
+    display: flex;
+    justify-content:center;
+    width: 100%;
+    align-items: center;
+    gap: 20%;
+}
+.like_section i{
+    font-size: 7vh;
+}
+.like_section i:hover{
+    transform: scale(0.90);
+    transition: 0.2s;
+}
+
+.fa-right-long{
+    font-size:6vh;
+    color: var(--red);
+}
+
+.fa-right-long:hover{
+    transform: scale(0.90);
+    transition: 0.2s;
+}
+
+.like_span{ 
+    margin-top: 4vh;
+} 
+.pic_div h2, .pic_div p{
+    font-size: 3vh;
+}
+
+.navigation{
+    width: 100vw;
+    height: 12vh;
+    font-size: 5vh;
+    font-weight: normal;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    padding-bottom: 1vh;
+    background-color: var(--yellow);
+}
+
+#user_info{
+    width: 35%;
+    display: flex;
+    justify-content: start;
+    align-items: end;
+    gap: 1vw;
+}
+
+#profile_pic{
+    width: 9vh;
+    height: 9vh;
+    border-radius:50%;
+    border:solid black;
+}
+#nav_inner_div{
+    width: 41%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+#log_out_button{
+    border: solid thick;
+    border-radius: 10px;
+    padding:0 10;
+    background-color: var(--red);
+}
+
+#log_out_button:hover{
+    cursor: pointer;
+    background-color: var(--light_red);
+    transform:scale(0.95);
+    transition:ease-out 0.2s;
+}
+
+i{    
+    font-size: 40px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+#profile{
+    display: none; 
+    height: 88vh;
+    width: 100vw;
+    justify-content: end; 
+    overflow: auto;
+    gap: 5vw;
+}
+#profile_inner_div{
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#post_part{
+    width: 70%;
+}
+#post_part span{
+    font-size: 3vw;
+}
+
+#following_part{
+    padding:3vw 0vw 2vw 0vw;
+    width: 100%;
+    height: fit-content; 
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    gap: 2vw; 
+    border-bottom:solid thin var(--yellow);
+    margin-bottom: 2vw;
+}
+
+.following_inner_part{
+    width: 20%;
+    height: fit-content; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1vh;
+}
+
+#people{
+    border-left: solid thin var(--yellow);
+    height: fit-content;
+    margin: 50px 50px;
+    display: flex;
+    width: fit-content;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: end;
+    gap: 1vw; 
+}
+
+#people_text{
+    margin-bottom: 2vw;
+}
+
+.people_inner_part{
+    width: 20vw;
+    display: flex;
+    align-items: center;  
+    font-size: 2vw;
+    justify-content: space-between;
+    gap: 2vw;
+    padding-bottom: 1vh;
+}
+
+.follow_button{
+    padding: 0.4vw 1.7vw;
+    border-radius: 1vw; 
+    border: none;
+    font-size: 1.5vw;
+    background-color: lightblue;
+    border: solid thick black;
+}
+.follow_button:hover{
+    transform:scale(0.95);
+    transition:ease-out 0.2s;
+}
+
+span{
+    font-size: 4vh;
+}
+
+#your_posts{ 
+    width: 45vw; 
+    display: flex;
+    padding-top: 2vw;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.img_div{
+    width: 15vw;
+    height: 17vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+    overflow: hidden;
+}
+
+.img_delete{
+    position: relative;
+    color:var(--red);
+    right: 5%;
+    top:5%;
+    display: none;
+    font-size: 2vw;
+}
+
+.my_pic{
+    width: 15vw;
+    height: 17vw; 
+    position: absolute;
+}
+.img_info{
+    width: 15vw; 
+    height: 7.5vw;
+    background-color: rgba(239, 49, 109, 0.5);
+    position: relative;
+    overflow: scroll;
+    text-align: center;
+    display: none;
+    color: white;
+    font-size: 1vw;
+}
+.img_div:hover{
+    transform: scale(1.3);
+    transition:ease-out 0.5s;
+    z-index: 50;
+}
+
+#choose_file{    
+    background-color: transparent;
+    color: transparent;
+    padding: 0px 0px 20vh 20vw;
+    position: absolute;
+    cursor: pointer;
+}
+#post_button{
+    font-size: 4vw;
+    font-weight: bolder;
+    position: absolute;
+}
+
+#post_div{
+    border: solid thick;
+    width: 3vw;
+    height: 3vw;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    background-color: var(--red);
+    overflow: hidden; 
+    border-radius: 30%;
+    position: relative;
+}
+#post_div:hover{
+    transform:scale(0.95);
+    transition:ease-out 0.2s;
+    background-color: var(--light_red);
+}
+
+#post_part{
+    display: flex;
+    gap: 50%;
+    justify-content: center;
+    align-items: center; 
+} 
+
+#settings{
+    height: 88vh;
+    width: 100%;
+    display: none;
+    background-color: transparent;
+    display: none;
+    flex-direction: column;
+    gap: 1vh;
+}
+#profile_picture_div{
+    width: 17vw;
+    height: 5vh;
+    background-color: var(--red);
+    border: none;
+    border-radius: 20px;
+    position: relative;
+    top: 50px;
+    left: 100px;
+    display: flex;
+    justify-content: center;
+    padding: 0px 1vw;
+    border: solid thick;
+    overflow: hidden;
+}
+#profile_picture_div:hover{
+    transform:scale(0.95);
+    transition:ease-out 0.2s;
+}
+
+#profile_picture_button{
+    width: 17vw;
+    height: 5vh;
+    font-size: 1.5vw;
+    font-weight: bolder;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+}
+#profile_picture_input{
+    padding-top: 5vw;
+    position: relative;
+    border: none;
+    cursor: pointer;
+}
+#profile_picture_input:focus{
+    outline: none;
+}
+
+#dark_mode_button,#light_mode_button{
+    width: fit-content;
+    height: 5vh;
+    padding: 0px 1vw;
+    font-size: 1.5vw;
+    font-weight: bolder;
+    background-color: var(--red);
+    border: solid thick;
+    position: relative;
+    top: 50px;
+    left: 100px;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+}
+#dark_mode_button:hover,#light_mode_button:hover{
+    transform:scale(0.95);
+    transition:ease-out 0.2s;
+}
+
+#light_mode_button{
+    display: none;
+}
+
+.others_comment_i{
+    font-size: 3vh;
+    display: none;
+    color: var(--red);
+}
+.fa-trash:hover{
+    transform:scale(1.3);
+    transition:ease-out 0.2s;
+}
+
+.others_comment_div{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.others_comment{
+    width: 90%;
+}
+</style>
+
+
+</head>
+<body>
+    <div class="login_page" id="login_page">
+        <video autoplay muted loop playsinline id="bg_video" src="bg_video2.mp4"></video>
+        <div id="login">
+            <h1>login</h1>
+            <label>user name</label>
+            <input type="text" id="naam"><br>
+            <label>enter password</label>
+            <div id="password_div">
+            <input id="pass" type="password"><br>
+            <i id="eye" class="fa-solid fa-eye"></i>
+            </div>
+            <div class="inner_div">
+                <button id="sign_up">sign-up</button>
+                <button id="login_enter_button">enter</button>
+            </div>
+        </div>
+        <div id="sign-up">
+            <h1>sign-up</h1>
+            <label>user name</label>
+            <input type="text" id="new_name"><br>
+            <label>create password</label>
+            <input type="password" id="new_pass1"><br>
+            <label>re-write password</label>
+            <input type="password" id="new_pass2"><br><br>   
+            <div class="inner_div">
+                <button id="login_">login</button>
+                <button id="sign_up_enter_button">enter</button>
+            </div>
+        </div>
+
+    </div>
+    
+    
+    <div id="main">
+        <div class="navigation">
+            <div id="user_info">
+                <img src="https://static.vecteezy.com/system/resources/previews/005/544/718/original/profile-icon-design-free-vector.jpg" id="profile_pic">
+                <p id="UserName"></p>
+            </div>
+            <div id="nav_inner_div">
+            <p id="position_name">Home</p>
+            <p id="log_out_button">log out</p>
+            </div>
+        </div>
+        <div id="home">
+            <span>Posts</span>
+            <div id="others_posts">
+                <!-- these portions are created with javascript -->
+
+           <!-- <div class="pic_div">
+                    <h1 class="other_name">israr</h1>
+                    <img class="other_pic" src="f3.png">
+                    <div class="like_section">
+                        <i class="fa-regular fa-heart" id="heart"></i>
+                        <i class="fa-regular fa-comment" id="comment"></i>
+                    </div>
+                    <div class="comment_input_section">
+                        <input class="comment_input"></input>
+                        <i class="fa-solid fa-right-long comment_errow"></i>
+                    </div>
+                    <h2 class="like_span">Likes</h2>
+                    <p  class="like_num"></p>
+                    <h2 class="comment_span">comments</h2>
+                    <p  class="others_comment comment_section"><span class="commenter_name">sanan: </span>hbhfbhfbh</p>
+                </div> -->
+            </div>
+        </div>
+        <div id="profile">
+            <div id="profile_inner_div">
+                <div id="following_part">
+                
+                    <div id="Post" class="following_inner_part">
+                        <h2>Posts</h2>
+                        <p id="posts">0</p>
+                    </div>
+                
+                    <div id="follower" class="following_inner_part">
+                        <h2>Followers</h2>
+                        <p id="followers">0</p>
+                    </div>
+                
+                    <div id="following" class="following_inner_part">
+                        <h2>Following</h2>
+                        <p id="followings">0</p>
+                    </div>
+                
+                </div>
+                <div id="post_part">
+                    <span>Your Posts</span>
+                    <div id="post_div">
+                        <p id="post_button">+</p>
+                        <input type="file" id="choose_file"></input>
+                    </div>
+                </div>
+                <div id="your_posts">
+                    <!-- <img class="my_pic" src="f4.png">
+                    <img class="my_pic" src="p.png" >
+                    <img class="my_pic" src="p1.png">
+                    <img class="my_pic" src="p2.png"> -->
+                </div> 
+            </div>
+            <div id="people">
+                <!-- <h2 id="people_text">People you may know</h2> -->
+                <!-- <div class="people_inner_part">
+                    <h3>Israr</h3>
+                    <button class="follow_button" >follow</button>
+                </div>  
+
+                <div class="people_inner_part">
+                    <h3>Sanan</h3>
+                    <button class="follow_button">follow</button>
+                </div> -->
+            </div>
+        </div>
+
+        <div id="settings">
+            <div id="profile_picture_div">
+                <button id="profile_picture_button">change profile picture</button>
+                <input type="file" id="profile_picture_input">
+            </div>
+            <button id="dark_mode_button">dark mode</button>
+            <button id="light_mode_button">light mode</button>
+        </div>
+
+
+        <div class="options">
+            <button class="option_button" id="profile_button">profile</button>
+            <button class="option_button" id="home_button">Home</button>
+            <button class="option_button" id="setting_button">settings</button>
+        </div>
+    </div>
+
+    <script>
+        
+var sign_up_button=document.getElementById('sign_up');
+var login_button=document.getElementById('login_');
+var sign_up=document.getElementById('sign-up');
+var login=document.getElementById('login');
+var login_enter_button=document.getElementById('login_enter_button');
+var sign_up_enter_button=document.getElementById('sign_up_enter_button');
+var main=document.getElementById('main');
+var home=document.getElementById('home');
+var login_page=document.getElementById('login_page');
+var profile=document.getElementById('profile');
+var profile_button=document.getElementById('profile_button');
+var home_text=document.getElementById('home_text');
+var profile_text=document.getElementById('profile_text');
+var heart=document.getElementById('heart');
+var comment=document.getElementById('comment');
+var comment_input_section=document.getElementById('comment_input_section');
+var others_comment=document.getElementById('others_comment');
+var eye=document.getElementById('eye');
+var UserName=document.getElementById('UserName');
+var message1=document.getElementById('message1');
+var message2=document.getElementById('message2');
+var people=document.getElementById('people');
+var followings=document.getElementById("followings");
+var following_num=0;
+var likes=0;
+var condition=" ";
+var followers=document.getElementById('followers');
+var follower_num=0;
+var choose_file=document.getElementById('choose_file');
+var your_posts=document.getElementById('your_posts');
+var others_posts=document.getElementById('others_posts');
+var setting_button=document.getElementById('setting_button');
+var settings=document.getElementById('settings');
+var position_name=document.getElementById('position_name');
+var profile_pic=document.getElementById('profile_pic');
+var profile_picture_button=document.getElementById('profile_picture_button');
+var position=0;
+var position2=0;
+var dark_mode_button=document.getElementById('dark_mode_button');
+var light_mode_button=document.getElementById('light_mode_button');
+var log_out_button=document.getElementById('log_out_button');
+var posts=document.getElementById('posts');
+
+window.oncut=function(){
+    document.getElementById("new_name").value="";
+    document.getElementById("new_pass1").value="";
+    document.getElementById("new_pass2").value="";
+    document.getElementById("naam").value="";
+    document.getElementById("pass").value="";
+}
+
+if(localStorage.getItem("instaData")==null){
+    login_page.style.display="flex";
+    main.style.display="none";
+}
+
+window.onload=function(){
+    let stored_user_name=localStorage.getItem("stored_user_name")
+
+    if(stored_user_name=="none"){
+        login_page.style.display="flex";
+    }
+    else{
+        main.style.display="flex";
+        UserName.innerHTML=stored_user_name;
+        others_posts.innerHTML=''
+        display_posts_on_main();
+        let userNameValue=UserName.innerHTML;
+        let temp_profile_key=userNameValue+"profile_pic";
+        //getting profile picture
+        let profile_picture_data=JSON.parse(localStorage.getItem(temp_profile_key));
+        //if user has a profile picture then show it
+        if(profile_picture_data!==null){
+            profile_pic.src=profile_picture_data;
+        }
+    }
+}
+
+//this function is to hide and show password
+eye.onclick=function(){
+    if(eye.classList.contains("fa-eye")){
+        eye.classList.remove("fa-eye")
+        eye.classList.add("fa-eye-slash")
+        pass.type="text";
+    }
+    else if(eye.classList.contains("fa-eye-slash")){
+        eye.classList.remove("fa-eye-slash")
+        eye.classList.add("fa-eye")
+        pass.type="password";
+    }
+}
+//this function is for sign up button it will allow user to sign-up
+sign_up_button.onclick=function(){
+    sign_up.style.display="flex";
+    login.style.display="none";
+    document.getElementById("naam").value="";
+    document.getElementById("pass").value="";
+}
+//this function is for login button it will allow user to login
+login_button.onclick=function(){
+    login.style.display="flex";
+    sign_up.style.display="none";
+    document.getElementById("new_name").value="";
+    document.getElementById("new_pass1").value="";
+    document.getElementById("new_pass2").value="";
+}
+//this function is for the enter button which is present in sign-up box 
+sign_up_enter_button.onclick=function(){
+    let instaData=JSON.parse(localStorage.getItem("instaData"));
+    //here we get all enteries user enter in variables 
+    let new_name=document.getElementById("new_name");
+    let new_pass1=document.getElementById("new_pass1")
+    let new_pass2=document.getElementById("new_pass2")
+
+    // if(instaData!=null){
+    //     if(instaData[new_name.value]!=null){
+    //         alert("you already have an account");
+    //     }
+    // }
+
+    //if someone has sign-up before then these operations will occur
+    if(instaData!=null || instaData==null){
+        //if the entered name is already signed-up before, then it will show error
+        // if(instaData[new_name.value]!=null){
+        //     alert("you already have an account");
+        // }
+        //if the entered name is not signed-up before then these operations will occur
+        // else{
+
+        if(instaData!=null && instaData[new_name.value]!=null){
+            // if(instaData[new_name.value]!=null){
+                alert("you already have an account");
+            // }
+        }
+
+        else{
+
+         //entered name or password is too short
+            if(new_name.value.length<3 || new_pass1.value.length<3){
+                alert("your name or password is too short");
+            }
+            //password did not matched
+            else if(new_pass1.value!=new_pass2.value){
+                alert("your password did not matched");
+            }
+            //entered name or password contain spaces
+            else if(new_name.value.includes(" ") || new_pass1.value.includes(" ")){
+                alert("your name or password should not have spaces");
+            }
+            //if someone else has signed up before and all enteries of current user are correct then the corrent user will be signed-up
+            else{
+                localStorage.setItem("stored_user_name",new_name.value);
+                let stored_user_name=localStorage.getItem("stored_user_name");
+                UserName.innerHTML=stored_user_name;
+                position=0;
+                position2=0;
+                enter_home();
+                sign_up_enter_function();
+            }
+        }
+    }
+    //if no body has enterd before then this operation will occur
+    // else{
+    //     //entered name or password is too short
+    //     if(new_name.value.length<3 || new_pass1.value.length<3){
+    //         alert("your name or password is too short");
+    //     }
+    //     //password did not matched
+    //     else if(new_pass1.value!=new_pass2.value){
+    //         alert("your password did not matched");
+    //     }
+    //     //entered name or password contain spaces
+    //     else if(new_name.value.includes(" ") || new_pass1.value.includes(" ")){
+    //         alert("your name or password should not have spaces");
+    //     }
+    //     //if someone else has signed up before and all enteries of current user are correct then the corrent user will be signed-up
+    //     else{
+    //         localStorage.setItem("stored_user_name",new_name.value);
+    //         let stored_user_name=localStorage.getItem("stored_user_name");
+    //         UserName.innerHTML=stored_user_name;
+    //         position=0;
+    //         position2=0;
+    //         enter_home();  
+    //         sign_up_enter_function();    
+    //     }
+    // }
+}
+//this function is for the enter button which is present in login box 
+login_enter_button.onclick=function(){
+
+    let pass=document.getElementById('pass');
+    let naam=document.getElementById('naam');
+    let instaData=JSON.parse(localStorage.getItem("instaData"));
+    //this statement will check weather any one has sign-up or not, if not then it will show error
+    if(instaData==null){
+       alert("you dont have account");
+    }
+    //this statement means that someone has signed-up 
+    else{
+        //if the person who is trying to login has signed-up before or not, if not it will show error
+        if(instaData[naam.value]==null){
+            alert("you dont have account");
+        }
+        //if the entered password matched with the password of the user in storage, if not it will show error
+        else if(instaData[naam.value].password!==pass.value){
+            alert(innerHTML="wrong password");
+        }
+        //if all ok 
+        else{
+            localStorage.setItem("stored_user_name",naam.value);
+            let stored_user_name=localStorage.getItem("stored_user_name");
+            console.log(stored_user_name);
+            UserName.innerHTML=stored_user_name;
+            position2=0;
+            position=2;
+            enter_home();
+            log_in_enter_function();
+        }
+    }
+    condition=" ";
+}
+//this function will hide login page when a person login or sign-up
+function enter_home(){
+    login_page.style.display="none";
+    main.style.display="flex";
+    home.style.display="flex";
+    people.innerHTML='';
+    profile.style.display="none";
+    settings.style.display="none";
+    your_posts.innerHTML='';
+    others_posts.innerHTML='';
+    profile_pic.src="https://static.vecteezy.com/system/resources/previews/005/544/718/original/profile-icon-design-free-vector.jpg";
+}
+//this is for home button, it will display home screen
+home_button.onclick=function(){
+    //here we decide which page to show which to hide on home button click
+    settings.style.display="none";
+    home.style.display="flex";
+    position_name.innerHTML="Home";
+    profile.style.display="none"
+    
+    position=1;
+    let postData=JSON.parse(localStorage.getItem('postData'))
+
+    //this will asure that the home page is not already displayed and the users following have posted some pics before
+    if(postData!==null && position==0){
+        display_posts_on_main();
+    }
+}
+//this is for profile button, it will display profile screen
+profile_button.onclick=function(){
+
+    settings.style.display="none";
+    home.style.display="none";
+    position_name.innerHTML="Profile";
+    profile.style.display="flex";
+    
+    // this will asure that the profile page is not already displayed
+    if(position2==0){
+        profile_button_follow_fucntion();
+        position2=1;
+    }
+}
+//this function will activate when a person login, it will display profile pic, user name and posts of his followings 
+function log_in_enter_function(){
+
+    let userNameValue=UserName.innerHTML;
+    console.log(userNameValue);
+    //creating a temporary name of key which has stored user's profile picture
+    let temp_profile_key=userNameValue+"profile_pic";
+    //getting profile picture
+    let profile_picture_data=JSON.parse(localStorage.getItem(temp_profile_key));
+
+    //if user has a profile picture then show it
+    if(profile_picture_data!==null){
+        profile_pic.src=profile_picture_data;
+    }
+
+    //getting all postsData
+    let postData=JSON.parse(localStorage.getItem('postData'))
+
+    //checking postData should have some posts thenn show
+    if(postData!==null){
+        display_posts_on_main();
+    }
+}
+//this function will activates when a new person sign-up, it will store user's information in local storage 
+function sign_up_enter_function(){
+    //user name and password enteries
+    let new_name=document.getElementById('new_name').value;
+    let new_pass1=document.getElementById('new_pass1').value;
+
+    //creating a temporary array to place it in instaData structure
+    let temporary=[];
+
+    //getting new instaData which will stored userName, password and his following array,if it already existed or not
+    var instaData=JSON.parse(localStorage.getItem('instaData')) || {}
+
+    //the instaData will have according to user's name, so it will be unique
+    instaData[new_name]={
+        Name:new_name,
+        password:new_pass1,
+        following:temporary
+    }
+
+    //stringifing and setting the current user data in local storage
+    var stringified_data=JSON.stringify(instaData);
+    localStorage.setItem("instaData",stringified_data);
+    //displaying current user name on screen
+    // UserName.innerHTML=new_name;
+}
+//this function is to display the user's profile information followers, followings and posts, add posts, follow or unfollow will also done by this function
+function profile_button_follow_fucntion(){
+    //getting the current user name from screen
+    let userNameValue=UserName.innerHTML;
+    //getting all users data from local storage which is instaData
+    let instaData=JSON.parse(localStorage.getItem('instaData'));
+    //making temporary to get the key which has stored the current user' follower numbers
+    let geted_temp_followers_length_key=userNameValue+"_follwers";
+    //getting key which has stored the current user's follower numbers from local storage
+    let followers_length_key=JSON.parse(localStorage.getItem(geted_temp_followers_length_key));
+
+    //if user has no followers than it will make a variable with value 0
+    if(followers_length_key==null){
+        var followers_length2=0;
+    }
+    //if user has some followers than making a variable with value contains the number of his followers
+    else{
+        var followers_length2=followers_length_key;
+    }
+    //displaying followers
+    followers.innerHTML=followers_length2;
+
+    //dislaying the number of following current user has
+    followings.innerHTML=instaData[userNameValue].following.length;    
+
+
+    //making a loop according to the names of all user
+    for(let names in instaData){
+        //this if statement will skip the current user's name because we dont need it in follow unfollow list
+        if(instaData[names].Name==userNameValue){
+            continue;
+        }
+        //here we are creating some html elements,giving then classNames and idNames to make list of people user can follow
+        //this div will contain other user's name and their follow button
+        let people_inner_part=document.createElement("div");
+        people_inner_part.className="people_inner_part";
+        //this heading will contain contain the other users names
+        let h3=document.createElement("h3");
+        //follow buttons
+        let follow_button=document.createElement("button");
+        follow_button.className="follow_button";
+        people_inner_part.className="people_inner_part";
+        people.appendChild(people_inner_part);
+        people_inner_part.appendChild(h3);
+        people_inner_part.appendChild(follow_button);
+
+        //making a temporary variable which will be made with the combination of current user name and the name of other users which is running in this loop
+        let temp_people_id=userNameValue+names;
+        //now every heading has its separate id
+        h3.id=temp_people_id;
+
+        //giving separate id name to buttons
+        let temp_button_id=userNameValue+names+"button";
+        follow_button.id=temp_button_id;
+
+        let temp_people=document.getElementById(temp_people_id);
+        let temp_button=document.getElementById(temp_button_id);
+        
+        temp_people.innerHTML=names;
+        temp_button.innerHTML="follow";
+
+
+        //if the user name is already present in the current users following data then 
+        if(instaData[userNameValue].following.includes(names)){
+            temp_button.style.backgroundColor="darkblue";
+            temp_button.style.color="white";
+            temp_button.innerHTML="following";
+        }
+
+        //this click functions will apply on avery button seperately
+        temp_button.onclick=function(){
+            //getting the the instaData which stores names, password and followings
+            let instaData=JSON.parse(localStorage.getItem("instaData"));
+
+            //temporary array of followings
+            let following_array=[];
+            //storing the array which contains current user's follwoing before
+            following_array=instaData[userNameValue].following;
+
+            //if user has not followed any one before 
+            if(instaData[userNameValue].following.length==0){
+                var following_length=0;
+            }
+            //if followed then
+            else{
+                var following_length=instaData[userNameValue].following.length;
+            }
+
+            // getting the color of button with the help of getComputedStyle
+            let temp_button_style=window.getComputedStyle(temp_button);
+            let temp_button_background_color=temp_button_style.backgroundColor;
+
+            //these will place the temporary array of followings in instaData followings, and make changes in buttons
+            if(temp_button_background_color=="rgb(173, 216, 230)"){
+                temp_button.style.backgroundColor="darkblue";
+                temp_button.style.color="white";
+                temp_button.innerHTML="following";
+                following_array[following_length]=names;
+                instaData[userNameValue].following=following_array;
+            }
+            else if(temp_button_background_color=="rgb(0, 0, 139)"){
+                temp_button.style.backgroundColor="lightblue";
+                temp_button.style.color="black";
+                temp_button.innerHTML="follow";
+                following_array=following_array.filter(item=>item!=names);
+                instaData[userNameValue].following=following_array;
+            }
+            //setting again the instaData after changes
+            localStorage.setItem("instaData",JSON.stringify(instaData));
+            //changing following number if user has follow or unfollow someone
+            followings.innerHTML=instaData[userNameValue].following.length;
+        }
+
+        //here we wil count the number of users who have current user's name in there following list
+        let followers_length=0;
+        for(var loop in instaData){
+            for(let i=0; i<instaData[loop].following.length; i++){
+                if(instaData[loop].following[i]==userNameValue){
+                    followers_length+=1;
+                }
+            }
+        }
+        followers.innerHTML=followers_length;
+        //here we are setting the follwers of current user name with unique key
+        let temp_followers_length_key=userNameValue+"_follwers";
+        localStorage.setItem(temp_followers_length_key,followers_length);
+    }
+
+    let postData=JSON.parse(localStorage.getItem('postData'))
+    if(postData!=null){
+        if(postData[userNameValue]!=null){
+            if(postData[userNameValue].info!=null){
+                posts.innerHTML=postData[userNameValue].info.length;
+            }
+        }
+    }
+    else{
+        posts.innerHTML=0;
+    }
+    //if there are some posts of current user then display them
+    if(postData!==null){
+        display_posts();
+    }
+}
+//this function is to add posts
+choose_file.onchange=function(event){
+
+    var userNameValue=UserName.innerHTML;
+
+    let postData2=JSON.parse(localStorage.getItem('postData'))    
+    if(postData2!=null){
+        if(postData2[userNameValue]!=null){
+            if(postData2[userNameValue].info!=null){
+                postData2[userNameValue].info=postData2[userNameValue].info.filter(item=>item!=null);
+            }
+        }
+    }
+    localStorage.setItem("postData",JSON.stringify(postData2));
+    //getting post data if exists or not
+    let postData=JSON.parse(localStorage.getItem('postData')) || {};
+    //operations to read selected file as url
+    let file=event.target.files[0];
+    var reader=new FileReader();
+    //to store likes and comments array
+    let like_num=0; 
+    let comment_num=[];
+    reader.readAsDataURL(file);
+
+    //finding the length of posts
+    //if there is no posts before 
+    if(postData[userNameValue]==null){
+        var dataURL=[];
+        var post_num=0;
+    }
+    //if there are posts before
+    else if(postData[userNameValue]!==null){
+        var dataURL=postData[userNameValue].info;
+        var post_num=postData[userNameValue].info.length;
+    }
+
+    // when posts are selected before
+    reader.onload=function(){
+        dataURL[post_num]={
+           image:reader.result,
+           likes:like_num,
+           comments:comment_num
+        }
+        postData[userNameValue]={
+            info:dataURL 
+        }
+
+    //setting posts in local storage
+
+    localStorage.setItem('postData',JSON.stringify(postData));
+
+    // to show current selected posts and
+    var img_div=document.createElement('div');
+    var img=document.createElement('img');
+    var img_delete=document.createElement('i');
+    var img_info=document.createElement('div');
+    img.className="my_pic";
+    img_delete.className="img_delete fa-solid fa-trash";
+    img_info.className="img_info";
+    img_div.className="img_div";
+    img.src=reader.result;
+    img_info.innerHTML="</br><b>Comments:</b></br> </br></br><b>likes:<b> 0";
+    img_delete.style.display="none";
+    function img_info_visible(){
+        img_info.style.display="block";
+        img_delete.style.display="block";
+    }
+    function img_info_not_visible(){
+        img_info.style.display="none";
+        img_delete.style.display="none";
+    }
+
+    img_div.addEventListener("mouseover",img_info_visible);
+    img_div.addEventListener("mouseout",img_info_not_visible);
+
+    your_posts.appendChild(img_div);
+    img_div.appendChild(img);
+    img_div.appendChild(img_delete);
+    img_div.appendChild(img_info);
+
+    
+    img_delete.onclick=function(){
+        let separate_postData=JSON.parse(localStorage.getItem('postData'));
+        img_div.style.display="none";
+        separate_postData[userNameValue].info[post_num]=null;
+        // separate_postData[userNameValue].info=separate_postData[userNameValue].info.filter(item=>item!=null);
+        localStorage.setItem("postData",JSON.stringify(separate_postData));
+        }
+    }
+            
+    // let separate_postData2=JSON.parse(localStorage.getItem('postData'))
+    // separate_postData2[userNameValue].info=separate_postData2[userNameValue].info.filter(item=>item!=null);
+    // localStorage.setItem("postData",JSON.stringify(separate_postData2));
+
+}
+//this function is to display user's posts in profile, it is called in profile_button_follow_fucntion()
+function display_posts(){
+    var userNameValue=UserName.innerHTML; 
+
+    let postData2=JSON.parse(localStorage.getItem('postData'))
+    if(postData2!=null){
+        if(postData2[userNameValue]!=null){
+            if(postData2[userNameValue].info!=null){
+                postData2[userNameValue].info=postData2[userNameValue].info.filter(item=>item!=null);
+            }
+        }
+    }
+    localStorage.setItem("postData",JSON.stringify(postData2));
+
+
+    let postData=JSON.parse(localStorage.getItem('postData'))
+    
+
+    if(postData[userNameValue]==null){ 
+        var post_num=0;
+    }
+    else if(postData[userNameValue]!==null){ 
+        var post_num=postData[userNameValue].info.length;
+    }
+
+    for(let i=0; i<post_num; i++){
+    var img_div=document.createElement('div');
+    var img=document.createElement('img');
+    var img_delete=document.createElement('i');
+    var img_info=document.createElement('div');
+    img_delete.className="img_delete fa-solid fa-trash";
+    img.className="my_pic";
+    img_info.className="img_info";
+    img_div.className="img_div";
+
+    your_posts.appendChild(img_div);
+    img_div.appendChild(img);
+    img_div.appendChild(img_delete);
+    img_div.appendChild(img_info);
+
+    let temp_img_id=userNameValue+i;
+    img.id=temp_img_id;
+    let temp_img=document.getElementById(temp_img_id);
+
+    let temp_img_info_id=userNameValue+i+"info";
+    img_info.id=temp_img_info_id;
+    let temp_img_info=document.getElementById(temp_img_info_id);
+
+    let temp_delete_id=userNameValue+i+"delete";
+    img_delete.id=temp_delete_id;
+    let temp_img_delete=document.getElementById(temp_delete_id);
+
+    let temp_div_id=userNameValue+i+"div";
+    img_div.id=temp_div_id;
+    let temp_img_div=document.getElementById(temp_div_id);
+
+    if(postData!=null){
+        if(postData[userNameValue]!=null){
+            if(postData[userNameValue].info!=null){
+                if(postData[userNameValue].info[i]!=null){
+                    temp_img.src=postData[userNameValue].info[i].image;
+                    let temp_all_comments=postData[userNameValue].info[i].comments.join("</br>")
+                    temp_img_info.innerHTML="</br><b>Comments:</b></br>"+temp_all_comments+"</br></br><b>likes:<b> "+postData[userNameValue].info[i].likes;
+                }
+            }
+        }
+    }
+    img_delete.style.display="none";
+    function img_info_visible(){
+        temp_img_info.style.display="block";
+        temp_img_delete.style.display="flex";
+    }
+    function img_info_not_visible(){
+        temp_img_info.style.display="none";
+        temp_img_delete.style.display="none";
+    }
+
+    img_div.addEventListener("mouseover",img_info_visible);
+    img_div.addEventListener("mouseout",img_info_not_visible);
+
+    temp_img_delete.onclick=function(){
+            let separate_postData=JSON.parse(localStorage.getItem('postData'))
+            temp_img_div.style.display="none";
+            separate_postData[userNameValue].info[i]=null;
+            // separate_postData[userNameValue].info=separate_postData[userNameValue].info.filter(item=>item!=null);
+            localStorage.setItem("postData",JSON.stringify(separate_postData));
+        }
+        let separate_postData2=JSON.parse(localStorage.getItem('postData'))
+        separate_postData2[userNameValue].info=separate_postData2[userNameValue].info.filter(item=>item!=null);
+        localStorage.setItem("postData",JSON.stringify(separate_postData2));
+    }
+        
+    // let separate_postData2=JSON.parse(localStorage.getItem('postData'))
+    // separate_postData2[userNameValue].info=separate_postData2[userNameValue].info.filter(item=>item!=null);
+    // localStorage.setItem("postData",JSON.stringify(separate_postData2));
+}
+//this function will display other peoples posts whome user has followed 
+function display_posts_on_main(){
+    //getting user data and posts data
+    let instaData=JSON.parse(localStorage.getItem('instaData'));
+    let postData=JSON.parse(localStorage.getItem('postData'));
+
+    let userNameValue=UserName.innerHTML;
+    if(instaData!=null){        
+        if(instaData[userNameValue]!=null){
+        var user_following_length=instaData[userNameValue].following.length;
+        }
+    }
+    
+    //a loop which has the length of how many followers user has
+    for(let i=0; i<user_following_length; i++){
+
+        let temp_userName=instaData[userNameValue].following[i];
+
+        //a length which has value of how many images user in the loop has posted
+        if(postData==null){
+            var images_length=0;
+        }
+        else{
+            if(postData[temp_userName]==null){
+                var images_length=0;
+            }
+            else{
+                postData[temp_userName].info=postData[temp_userName].info.filter(item=>item!=null);
+                if(postData[temp_userName].info.length==0){
+                    var images_length=0;
+                }
+                else{
+                    var images_length=postData[temp_userName].info.length;
+                }
+            }
+        }
+
+        //a loop will run loop user images times
+        for(let j=0; j<images_length; j++){
+
+            //creating html elements to show loop user images
+            let pic_div=document.createElement('div');
+            pic_div.className="pic_div";
+            let other_name=document.createElement('h1');
+            other_name.className="other_name";
+            let other_pic=document.createElement('img');
+            other_pic.className="other_pic";
+            let like_section=document.createElement('div');
+            like_section.className="like_section";
+            let heart=document.createElement('i');
+            heart.className="fa-regular fa-heart";
+            let comment=document.createElement('i');
+            comment.className="fa-regular fa-comment";
+            let comment_input_section=document.createElement('div');
+            comment_input_section.className="comment_input_section";
+            let comment_input=document.createElement('input');
+            comment_input.className="comment_input";
+            let comment_errow=document.createElement('i');
+            comment_errow.className="fa-solid fa-right-long comment_errow";
+            let like_span=document.createElement('h2');
+            like_span.className="like_span";
+            let like_num=document.createElement('p');
+            like_num.className="like_num";
+            let comment_span=document.createElement('h2');
+            comment_span.className="comment_span"; 
+
+            like_span.innerHTML="Likes";
+            comment_span.innerHTML="Comments";
+
+            other_name.innerHTML=temp_userName;
+
+            pic_div.appendChild(other_name);
+            pic_div.appendChild(other_pic);
+            pic_div.appendChild(like_section);
+            pic_div.appendChild(comment_input_section);
+            pic_div.appendChild(like_span);
+            pic_div.appendChild(like_num);
+            pic_div.appendChild(comment_span); 
+            
+            like_section.appendChild(heart);
+            like_section.appendChild(comment);
+            comment_input_section.appendChild(comment_input);
+            comment_input_section.appendChild(comment_errow); 
+            others_posts.appendChild(pic_div);
+
+            other_pic.src=postData[temp_userName].info[j].image;
+
+            //giving unique ids to html elements and operations for liking
+            let temp_id_heart=temp_userName+j+"heart"; 
+            heart.id=temp_id_heart;
+            temp_id_heart=document.getElementById(temp_id_heart);
+
+            let temp_like_key=userNameValue+"_likes_"+temp_userName+j; 
+
+            let temp_like_num_id=temp_userName+j+"_likes";
+            like_num.id=temp_like_num_id;
+            let temp_likes=document.getElementById(temp_like_num_id)
+            temp_likes.innerHTML=postData[temp_userName].info[j].likes;
+
+            var geted_temp_like_key=localStorage.getItem(temp_like_key);
+
+            if(geted_temp_like_key==1){
+                temp_id_heart.classList.remove("fa-regular");
+                temp_id_heart.classList.add("fa-solid");
+            }
+
+            temp_id_heart.onclick=function(){
+
+                if(postData[temp_userName].info[j].likes==0){
+                    var temp_like_num=0;
+                }
+                else if(postData[temp_userName].info[j].likes!==0){
+                    var temp_like_num=postData[temp_userName].info[j].likes;
+                }
+ 
+                if(temp_id_heart.classList.contains("fa-regular")){
+                    temp_id_heart.classList.remove("fa-regular");
+                    temp_id_heart.classList.add("fa-solid");
+                    temp_like_num+=1;
+                    var temp_like_key_num=1;
+                    postData[temp_userName].info[j].likes=temp_like_num;
+                }
+                else if(temp_id_heart.classList.contains("fa-solid")){
+                    temp_id_heart.classList.remove("fa-solid");
+                    temp_id_heart.classList.add("fa-regular");
+                    postData[temp_userName].info[j].likes=3;
+                    temp_like_num-=1;
+                    var temp_like_key_num=0;
+                    postData[temp_userName].info[j].likes=temp_like_num;
+                }
+
+                localStorage.setItem('postData',JSON.stringify(postData));
+                localStorage.setItem(temp_like_key,temp_like_key_num);
+                let postData2=JSON.parse(localStorage.getItem('postData'));
+                temp_likes.innerHTML=postData2[temp_userName].info[j].likes;
+            }
+
+            // operations for commenting
+            let temp_comment_id=temp_userName+j+"comment_button";
+            comment.id=temp_comment_id;
+            let temp_comment_button=document.getElementById(temp_comment_id);
+
+            let temp_comment_input_section_id=temp_userName+j+"input_section";
+            comment_input_section.id=temp_comment_input_section_id;
+            let temp_comment_input_section=document.getElementById(temp_comment_input_section_id);
+
+            let temp_comment_errow_id=temp_userName+j+"errow";
+            comment_errow.id=temp_comment_errow_id;
+            let temp_comment_errow=document.getElementById(temp_comment_errow_id);
+
+            let comment_input_id=temp_userName+j+"input";
+            comment_input.id=comment_input_id;
+            let temp_comment_input=document.getElementById(comment_input_id);
+
+            temp_comment_button.onclick=function(){
+                if(temp_comment_input_section.style.display==="flex"){
+                    temp_comment_input_section.style.display="none";
+                }
+                else{
+                    temp_comment_input_section.style.display="flex"
+                }
+            }
+
+            //function on posting comments
+            temp_comment_errow.onclick=function(){
+                if(temp_comment_input.value.trim()!==""){
+
+                    temp_comment_input_section.style.display="none";
+                    let postData2=JSON.parse(localStorage.getItem("postData"));
+
+                    let comment_num=postData2[temp_userName].info[j].comments.length;
+                    
+                    postData2[temp_userName].info[j].comments[comment_num]="<b>"+userNameValue+": </b> "+temp_comment_input.value;
+
+                    localStorage.setItem('postData',JSON.stringify(postData2));
+                    
+                    
+                let comment_section_div=document.createElement('div');
+                comment_section_div.className="others_comment_div comment_section_div";
+
+                let comment_section=document.createElement('p');
+                comment_section.className="others_comment comment_section";
+
+                let comment_section_i=document.createElement('i');
+                comment_section_i.className="others_comment_i fa-solid fa-trash";
+                
+                comment_section.innerHTML=postData2[temp_userName].info[j].comments[comment_num];    
+                
+                pic_div.appendChild(comment_section_div);
+                comment_section_div.appendChild(comment_section);
+                comment_section_div.appendChild(comment_section_i);
+
+                
+                    function bin_show(){
+                        comment_section_i.style.display="flex";
+                    }
+                    function bin_not_show(){
+                        comment_section_i.style.display="none";
+                    }
+
+                    comment_section_div.addEventListener("mouseover",bin_show);
+                    comment_section_div.addEventListener("mouseout",bin_not_show);
+
+                    comment_section_i.onclick=function(){
+                        let postData_comments=JSON.parse(localStorage.getItem("postData"));
+                        postData_comments[temp_userName].info[j].comments=postData_comments[temp_userName].info[j].comments.filter(item=>item!=comment_section.innerHTML);
+                        comment_section_div.style.display="none";
+                        localStorage.setItem("postData",JSON.stringify(postData_comments))
+                    }
+                }
+            }
+
+            let temp_comment_length=postData[temp_userName].info[j].comments.length;
+
+
+            for(let k=0; k<temp_comment_length; k++){
+
+                let comment_section_div=document.createElement('div');
+                comment_section_div.className="others_comment_div comment_section_div";
+
+                let comment_section=document.createElement('p');
+                comment_section.className="others_comment comment_section";
+
+                let comment_section_i=document.createElement('i');
+                comment_section_i.className="others_comment_i fa-solid fa-trash";
+
+                pic_div.appendChild(comment_section_div);
+                comment_section_div.appendChild(comment_section);
+                comment_section_div.appendChild(comment_section_i);
+
+                let temp_comment_section_div_id=temp_userName+" on "+j+" "+k+"div";
+                comment_section_div.id=temp_comment_section_div_id;
+                let temp_comment_section_div=document.getElementById(temp_comment_section_div_id);
+                
+                let temp_comment_section_id=temp_userName+" on "+j+" "+k;
+                comment_section.id=temp_comment_section_id;
+                let temp_comment_section=document.getElementById(temp_comment_section_id);
+                
+                let temp_comment_section_i_id=temp_userName+" on "+j+" "+k+"i";
+                comment_section_i.id=temp_comment_section_i_id;
+                let temp_comment_section_i=document.getElementById(temp_comment_section_i_id);
+                
+                temp_comment_section.innerHTML=postData[temp_userName].info[j].comments[k];
+                temp_comment_section_i.style.display="none";
+
+                let boldUserNAmeValue="<b>"+userNameValue+": </b> ";
+                if(temp_comment_section.innerHTML.includes(boldUserNAmeValue)){
+                    function bin_show(){
+                        temp_comment_section_i.style.display="flex";
+                    }
+                    function bin_not_show(){
+                        temp_comment_section_i.style.display="none";
+                    }
+                    temp_comment_section_div.addEventListener("mouseover",bin_show);
+                    temp_comment_section_div.addEventListener("mouseout",bin_not_show);
+                    temp_comment_section_i.onclick=function(){
+                        let postData_comments=JSON.parse(localStorage.getItem("postData"));
+                        postData_comments[temp_userName].info[j].comments=postData_comments[temp_userName].info[j].comments.filter(item=>item!=temp_comment_section.innerHTML);
+                        temp_comment_section_div.style.display="none";
+                        localStorage.setItem("postData",JSON.stringify(postData_comments))
+                    }
+                }
+            }
+        }
+    }
+}
+//this button is for settings like change profile picture and dark mode, ligth mode
+setting_button.onclick=function(){
+    home.style.display="none";
+    profile.style.display="none";
+    settings.style.display="flex";
+    position_name.innerHTML="Setting";
+}
+//this function is to change profile picture
+profile_picture_input.onchange=function(event){
+    //reading file input as url and showing it on screen
+    let userNameValue=UserName.innerHTML;
+    let temp_name=userNameValue+"profile_pic";
+
+    let file=event.target.files[0];
+    let read=new FileReader();
+
+    read.readAsDataURL(file);
+
+    read.onload=function(){
+        let profile_picture_data=read.result;
+        localStorage.setItem(temp_name,JSON.stringify(profile_picture_data));
+        profile_pic.src=read.result;
+    }
+    let postData=JSON.parse(localStorage.getItem('postData'));
+    if(postData!==null){
+        posts.innerHTML=postData[userNameValue].info.length;
+    }
+}
+//light mode
+light_mode_button.onclick=function(){
+    light_mode_button.style.display="none";
+    dark_mode_button.style.display="flex";
+    main.style.backgroundColor="wheat"
+}
+//dark mode
+dark_mode_button.onclick=function(){
+    light_mode_button.style.display="flex";
+    dark_mode_button.style.display="none";
+    main.style.backgroundColor="rgb(58, 49, 52)";
+}
+log_out_button.onclick=function(){
+    login_page.style.display="flex";
+    home.style.display="none";
+    profile.style.display="none";
+    main.style.display="none";
+    document.getElementById("new_name").value="";
+    document.getElementById("new_pass1").value="";
+    document.getElementById("new_pass2").value="";
+    document.getElementById("naam").value="";
+    document.getElementById("pass").value="";
+    let stored_user_name=localStorage.getItem("stored_user_name");
+    stored_user_name="none";
+    localStorage.setItem("stored_user_name",stored_user_name);
+}
+    </script>
+
+</body>
+</html>
+
