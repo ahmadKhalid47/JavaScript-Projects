@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>clock</title>
+
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+        font-size: xx-large;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+      }
+      #main {
+        width: 50vh;
+        height: 50vh;
+        background-color: lightblue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+      }
+      #main div {
+        height: 50%;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+      }
+      #main div p {
+        width: fit-content;
+        height: fit-content;
+      }
+      #main div:nth-of-type(1) {
+        rotate: 0deg;
+      }
+      #main div:nth-of-type(2) {
+        rotate: 30deg;
+      }
+      #main div:nth-of-type(3) {
+        rotate: 60deg;
+      }
+      #main div:nth-of-type(4) {
+        rotate: 90deg;
+      }
+      #main div:nth-of-type(5) {
+        rotate: 120deg;
+      }
+      #main div:nth-of-type(6) {
+        rotate: 150deg;
+      }
+      #main div:nth-of-type(7) {
+        rotate: 180deg;
+      }
+      #main div:nth-of-type(8) {
+        rotate: 210deg;
+      }
+      #main div:nth-of-type(9) {
+        rotate: 240deg;
+      }
+      #main div:nth-of-type(10) {
+        rotate: 270deg;
+      }
+      #main div:nth-of-type(11) {
+        rotate: 300deg;
+      }
+      #main div:nth-of-type(12) {
+        rotate: 330deg;
+      }
+
+      #main div:nth-of-type(1) p {
+        rotate: 0deg;
+      }
+      #main div:nth-of-type(2) p {
+        rotate: 330deg;
+      }
+      #main div:nth-of-type(3) p {
+        rotate: 300deg;
+      }
+      #main div:nth-of-type(4) p {
+        rotate: 270deg;
+      }
+      #main div:nth-of-type(5) p {
+        rotate: 240deg;
+      }
+      #main div:nth-of-type(6) p {
+        rotate: 210deg;
+      }
+      #main div:nth-of-type(7) p {
+        rotate: 180deg;
+      }
+      #main div:nth-of-type(8) p {
+        rotate: 150deg;
+      }
+      #main div:nth-of-type(9) p {
+        rotate: 120deg;
+      }
+      #main div:nth-of-type(10) p {
+        rotate: 90deg;
+      }
+      #main div:nth-of-type(11) p {
+        rotate: 60deg;
+      }
+      #main div:nth-of-type(12) p {
+        rotate: 30deg;
+      }
+
+      #needle {
+        position: absolute;
+        width: 2vh;
+        height: 2vh;
+        background-color: lightblue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #needle div {
+        position: absolute;
+      }
+
+      #hour {
+        width: 1vh;
+        height: 30vh;
+        background: linear-gradient(red 0 50%, transparent 50% 100%);
+        rotate: 0deg;
+      }
+      #minute {
+        width: 0.7vh;
+        height: 35vh;
+        rotate: 30deg;
+        background: linear-gradient(purple 0 50%, transparent 50% 100%);
+      }
+      #second {
+        width: 0.3vh;
+        height: 40vh;
+        background: linear-gradient(blue 0 50%, transparent 50% 100%);
+        rotate: 60deg;
+      }
+      #needle div:last-of-type {
+        width: 2.5vh;
+        height: 2.5vh;
+        background-color: black;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <div>
+        <p>12</p>
+      </div>
+      <div>
+        <p>1</p>
+      </div>
+      <div>
+        <p>2</p>
+      </div>
+      <div>
+        <p>3</p>
+      </div>
+      <div>
+        <p>4</p>
+      </div>
+      <div>
+        <p>5</p>
+      </div>
+      <div>
+        <p>6</p>
+      </div>
+      <div>
+        <p>7</p>
+      </div>
+      <div>
+        <p>8</p>
+      </div>
+      <div>
+        <p>9</p>
+      </div>
+      <div>
+        <p>10</p>
+      </div>
+      <div>
+        <p>11</p>
+      </div>
+    </div>
+
+    <div id="needle">
+      <div id="hour"></div>
+      <div id="minute"></div>
+      <div id="second"></div>
+      <div></div>
+    </div>
+
+    <script>
+      let hour = document.getElementById("hour");
+      let minute = document.getElementById("minute");
+      let second = document.getElementById("second");
+
+      function time_fun() {
+        let seconds = new Date().getSeconds();
+        let temp_sec = seconds * 6;
+        second.style.rotate = `${temp_sec}deg`;
+
+        let minutes = new Date().getMinutes();
+        let temp_min = minutes * 6 + (temp_sec - 360) / 60 + 6;
+        minute.style.rotate = `${temp_min}deg`;
+
+        let hours = new Date().getHours();
+        let temp_hour = hours * 30 + (temp_min - 360) / 12 + 30;
+        hour.style.rotate = `${temp_hour}deg`;
+      }
+      setInterval(time_fun, 1000);
+    </script>
+  </body>
+</html>
